@@ -54,7 +54,6 @@ if menu == "Contexto Territorial":
     with col2:
          st.markdown("<div class='edu-card'><h3>🔍 ¿Para qué sirve esta herramienta?</h3>"
                     "<p>Esta aplicación es un espacio de <b>Educación Ambiental</b> diseñado para que los agricultores de Aquitania comprendamos cómo nuestras decisiones en el cultivo de cebolla junca afectan el Lago de Tota.</p></div>", unsafe_allow_html=True)
-        st.write("### Motivo de la Aplicación")
         st.info("ECO-JUNCA surge para ofrecer soporte técnico y educación ambiental, permitiendo visualizar el impacto de las prácticas agrícolas convencionales y promover una transición sostenible.")
         # Imagen del Lago
         st.image("aquitania.png")
