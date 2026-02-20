@@ -49,13 +49,13 @@ if menu == "Contexto Territorial":
         genera una presión constante por contaminación difusa.
         """)
         # Imagen de campo
-        st.image("https://porelparamo.org/sites/default/files/styles/noticia_detalle/public/2021-03/Aquitania_Cebolla_Tota.jpg", caption="Paisaje productivo en la cuenca del Lago")
+        st.image("cultivo.png")
         
     with col2:
         st.write("### Motivo de la Aplicación")
         st.info("ECO-JUNCA surge para ofrecer soporte técnico y educación ambiental, permitiendo visualizar el impacto de las prácticas agrícolas convencionales y promover una transición sostenible.")
         # Imagen del Lago
-        st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Lago_de_Tota_Boyac%C3%A1.jpg/800px-Lago_de_Tota_Boyac%C3%A1.jpg", caption="Lago de Tota, Boyacá")
+        st.image("aquitania.png")
 
 # --- SECCIÓN 2: MAPA DE USO DE SUELO ---
 elif menu == "Mapa de Uso de Suelo":
