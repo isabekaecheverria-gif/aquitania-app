@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 # 1. CONFIGURACIÓN E IDENTIDAD
-st.set_page_config(page_title="ECO-JUNCA | Gestión Ambiental", page_icon="🧅", layout="wide")
+st.set_page_config(page_title="ECO-JUNCA | Educación Ambiental", page_icon="🧅", layout="wide")
 
 st.markdown("""
     <style>
@@ -26,16 +26,16 @@ insumos_db = {
 
 # 3. NAVEGACIÓN LATERAL
 with st.sidebar:
-    st.markdown("# ECO-JUNCA 🧅")
-    st.write("---")
-    menu = st.radio("MENÚ DE GESTIÓN:", ["Contexto Territorial", "Mapa de Uso de Suelo", "Calculadora de Impacto", "Laboratorio de Encuestas", "Estrategias de Manejo"])
+    st.markdown("# ECO-JUNCA 🌱")
+    st.write("### Educación para el Lago")
+    st.divider()
+    menu = st.radio("MÓDULOS DE APRENDIZAJE:", ["Contexto Territorial", "Mapa de Uso de Suelo", "Calculadora de Impacto", "Laboratorio de Encuestas", "Estrategias de Manejo"])
     st.write("---")
     st.caption("Proyecto de Grado | Ingeniería Ambiental")
 
-# --- SECCIÓN 1: CONTEXTO ---
+# --- SECCIÓN 1: NUESTRO TERRITORIO ---
 if menu == "Contexto Territorial":
-    st.markdown("<div class='main-header'><h1>ECO-JUNCA</h1><p>Sistema de Gestión Ambiental para el Cultivo de Cebolla Junca</p></div>", unsafe_allow_html=True)
-    
+    st.markdown("<div class='main-header'><h1>ECO-JUNCA: EDUCACIÓN AMBIENTAL</h1><p>Conociendo el impacto de nuestra siembra en el Lago de Tota</p></div>", unsafe_allow_html=True)
     col1, col2 = st.columns([1.5, 1])
     with col1:
         st.markdown("<div class='info-card'><h3>🌊 Importancia del Lago de Tota</h3>"
@@ -52,10 +52,13 @@ if menu == "Contexto Territorial":
         st.image("cultivo.png")
         
     with col2:
+         st.markdown("<div class='edu-card'><h3>🔍 ¿Para qué sirve esta herramienta?</h3>"
+                    "<p>Esta aplicación es un espacio de <b>Educación Ambiental</b> diseñado para que los agricultores de Aquitania comprendamos cómo nuestras decisiones en el cultivo de cebolla junca afectan el Lago de Tota.</p></div>", unsafe_allow_html=True)
         st.write("### Motivo de la Aplicación")
         st.info("ECO-JUNCA surge para ofrecer soporte técnico y educación ambiental, permitiendo visualizar el impacto de las prácticas agrícolas convencionales y promover una transición sostenible.")
         # Imagen del Lago
         st.image("aquitania.png")
+        st.info("El objetivo es aprender a producir sin agotar nuestros recursos naturales.")
 
 # --- SECCIÓN 2: MAPA DE USO DE SUELO ---
 elif menu == "Mapa de Uso de Suelo":
