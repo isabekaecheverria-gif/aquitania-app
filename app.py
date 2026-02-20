@@ -26,7 +26,7 @@ insumos_db = {
 
 # 3. MENÚ LATERAL INTERACTIVO
 with st.sidebar:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Lago_de_Tota_Boyac%C3%A1.jpg/300px-Lago_de_Tota_Boyac%C3%A1.jpg")
+    st.image("mapa_uso_suelo.png")
     st.header("📌 PANEL DE CONTROL")
     menu = st.radio("Seleccione Módulo:", ["Contexto Territorial", "Mapa de Uso de Suelo", "Calculadora de Insumos", "Resultados de Encuestas", "Estrategias de Gestión"])
     st.divider()
