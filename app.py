@@ -136,3 +136,4 @@ elif menu == "Rutas hacia la Siembra":
 
 st.divider()
 st.caption("Isabela O. | Educación Ambiental | Universidad El Bosque")
+st.set_page_config(page_title="ECO-JUNCA", page_icon="🌱", layout="centered", initial_sidebar_state="collapsed")
