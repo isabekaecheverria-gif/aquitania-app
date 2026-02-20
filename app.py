@@ -13,7 +13,7 @@ st.markdown("""
 
 st.markdown("<div class='main-header'><h1>SISTEMA DE GESTIÓN AMBIENTAL - AQUITANIA</h1><p>Educación para la Sostenibilidad del Lago de Tota</p></div>", unsafe_allow_html=True)
 
-# Datos técnicos sincronizados
+# Datos técnicos sincronizados con tu Introducción
 info = {
     "Sostenible (Agroecológica)": {
         "titulo": "🌱 ESTRATEGIA SOSTENIBLE (P+L)",
@@ -37,4 +37,19 @@ info = {
 
 with st.sidebar:
     st.header("Menú de Navegación")
-    opcion = st.selectbox("Elija Escenario:", ["Inicio", "Sostenible (Agroecológica)", "Intermedia (Transición)", "Convencional (Química
+    # AQUÍ ESTABA EL ERROR: Asegúrate de que esta línea esté completa
+    opcion = st.selectbox("Elija Escenario:", ["Inicio", "Sostenible (Agroecológica)", "Intermedia (Transición)", "Convencional (Química)"])
+
+if opcion == "Inicio":
+    st.write("### Bienvenida al Sistema de Soporte a la Decisión")
+    st.info("Esta herramienta permite visualizar el impacto de la agricultura de cebolla junca en el ecosistema estratégico del Lago de Tota.")
+    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Lago_de_Tota_Boyac%C3%A1.jpg/800px-Lago_de_Tota_Boyac%C3%A1.jpg", caption="Vista del Lago de Tota")
+else:
+    data = info[opcion]
+    st.subheader(data['titulo'])
+    st.markdown(f"**🔍 Descripción Técnica:** {data['desc']}")
+    st.markdown(f"**💧 Impacto Hídrico:** {data['lago']}")
+    st.success(f"**💡 Plan de Acción:** {data['detalles']}")
+
+st.divider()
+st.caption("Proyecto de Grado | Isabela O. | Ingeniería Ambiental | Universidad El Bosque")
