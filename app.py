@@ -2,105 +2,113 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# 1. CONFIGURACIÓN E IDENTIDAD VISUAL
-st.set_page_config(page_title="Gestión Ambiental Aquitania", page_icon="🧅", layout="wide")
+# 1. CONFIGURACIÓN E IDENTIDAD
+st.set_page_config(page_title="ECO-JUNCA | Gestión Ambiental", page_icon="🧅", layout="wide")
 
 st.markdown("""
     <style>
-    .main-header {background-color: #1b5e20; padding: 30px; color: white; border-radius: 15px; text-align: center; margin-bottom: 20px;}
-    .section-card {background-color: #ffffff; padding: 20px; border-radius: 10px; border-left: 8px solid #2e7d32; border-right: 1px solid #e0e0e0; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; margin-bottom: 20px;}
-    .metric-box {background-color: #f1f8e9; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #2e7d32;}
+    .main-header {background-color: #004d40; padding: 35px; color: white; border-radius: 15px; text-align: center; margin-bottom: 25px; border-bottom: 5px solid #81c784;}
+    .info-card {background-color: #f1f8e9; padding: 20px; border-radius: 10px; border-left: 10px solid #2e7d32; margin-bottom: 20px;}
+    .stMetric {background-color: #ffffff; padding: 15px; border-radius: 10px; border: 1px solid #2e7d32;}
     </style>
     """, unsafe_allow_html=True)
 
-# 2. BASE DE DATOS TÉCNICA DE INSUMOS (Lo que me diste)
+# 2. BASE DE DATOS TÉCNICA DE INSUMOS
 insumos_db = {
-    "UREA (CO(NH₂)₂)": {"tipo": "Fertilizante Nitrogenado", "uso": "Estimula crecimiento vegetativo.", "impacto": "Transformación en nitratos (NO₃⁻); Eutrofización y pérdida de oxígeno en el Lago."},
-    "NITRATO DE AMONIO (NH₄NO₃)": {"tipo": "Fertilizante Nitrogenado", "uso": "Desarrollo rápido del cultivo.", "impacto": "Contaminación de aguas superficiales y alteración del equilibrio trófico."},
-    "FOSFATO DIAMÓNICO (DAP)": {"tipo": "Fertilizante Fosfatado", "uso": "Desarrollo radicular.", "impacto": "Aporte de fósforo soluble; principal responsable de macrófitas y sedimentación."},
-    "CLORPIRIFOS": {"tipo": "Insecticida (Organofosforado)", "uso": "Control de insectos de suelo.", "impacto": "Alta toxicidad acuática; inhibe enzimas nerviosas; bioacumulable."},
-    "MANCOZEB": {"tipo": "Fungicida (Ditiocarbamato)", "uso": "Control de hongos foliares.", "impacto": "Liberación de metales pesados (Mn, Zn); daño a la microbiota del suelo."},
-    "CARBENDAZIM": {"tipo": "Fungicida Sistémico", "uso": "Control de hongos.", "impacto": "Persistencia en suelo y agua; impacto en lombrices y organismos acuáticos."},
-    "GALLINAZA": {"tipo": "Enmienda Orgánica", "uso": "Aporte de materia orgánica.", "impacto": "Riesgo de contaminación microbiológica y lixiviación si no hay compostaje previo."}
+    "UREA (CO(NH₂)₂)": {"uso": "Estimula el crecimiento vegetativo.", "impacto": "Transformación en nitratos; Eutrofización y pérdida de oxígeno hídrico."},
+    "NITRATO DE AMONIO (NH₄NO₃)": {"uso": "Desarrollo rápido del follaje.", "impacto": "Contaminación de aguas superficiales y alteración del equilibrio trófico."},
+    "FOSFATO DIAMÓNICO (DAP)": {"uso": "Desarrollo radicular.", "impacto": "Aporte de fósforo soluble; responsable de proliferación de macrófitas."},
+    "CLORPIRIFOS": {"uso": "Insecticida (Control de insectos de suelo).", "impacto": "Alta toxicidad acuática; inhibe enzimas nerviosas; bioacumulable."},
+    "MANCOZEB": {"tipo": "Fungicida", "uso": "Control de hongos foliares.", "impacto": "Liberación de metales pesados (Mn, Zn); daño a microbiota del suelo."},
+    "CARBENDAZIM": {"uso": "Fungicida sistémico.", "impacto": "Persistencia en suelo y agua; impacto en organismos acuáticos y lombrices."},
+    "GALLINAZA": {"uso": "Enmienda orgánica (Materia orgánica).", "impacto": "Riesgo de contaminación microbiológica y lixiviación de nutrientes si no es tratada."}
 }
 
-# 3. MENÚ LATERAL INTERACTIVO
+# 3. NAVEGACIÓN LATERAL
 with st.sidebar:
-    st.image("mapa_uso_suelo.png")
-    st.header("📌 PANEL DE CONTROL")
-    menu = st.radio("Seleccione Módulo:", ["Contexto Territorial", "Mapa de Uso de Suelo", "Calculadora de Insumos", "Resultados de Encuestas", "Estrategias de Gestión"])
-    st.divider()
-    st.info("Objetivo: Generar estrategias que permitan la coexistencia entre producción y conservación.")
+    st.markdown("# ECO-JUNCA 🧅")
+    st.write("---")
+    menu = st.radio("MENÚ DE GESTIÓN:", ["Contexto Territorial", "Mapa de Uso de Suelo", "Calculadora de Impacto", "Laboratorio de Encuestas", "Estrategias de Manejo"])
+    st.write("---")
+    st.caption("Proyecto de Grado | Ingeniería Ambiental")
 
-# --- MÓDULO 1: CONTEXTO ---
+# --- SECCIÓN 1: CONTEXTO ---
 if menu == "Contexto Territorial":
-    st.markdown("<div class='main-header'><h1>AQUITANIA Y EL LAGO DE TOTA</h1></div>", unsafe_allow_html=True)
+    st.markdown("<div class='main-header'><h1>ECO-JUNCA</h1><p>Sistema de Gestión Ambiental para el Cultivo de Cebolla Junca</p></div>", unsafe_allow_html=True)
+    
     col1, col2 = st.columns([1.5, 1])
     with col1:
-        st.write("### ¿Por qué esta Aplicación?")
+        st.markdown("<div class='info-card'><h3>🌊 Importancia del Lago de Tota</h3>"
+                    "<p>El Lago de Tota es un ecosistema estratégico de alta montaña, clasificado como lago por su profundidad (>60m) y red de afluentes. Suministra agua a más de 250,000 personas en Boyacá y es el soporte de la industria de la trucha arcoíris.</p></div>", unsafe_allow_html=True)
+        
+        st.write("### 🌱 El Cultivo de Cebolla Junca (*Allium fistulosum*) ")
         st.write("""
-        Esta herramienta se crea para mitigar la presión ambiental sobre el **Lago de Tota**, el cuerpo de agua dulce más grande de Colombia. 
-        Aquitania produce el 80% de la cebolla junca del país, pero el uso de agroquímicos pone en riesgo el agua que abastece a 250,000 personas (incluyendo Sogamoso) 
-        y la industria de la trucha arcoíris.
+        Aquitania es la capital cebollera de Colombia, concentrando el **80% de la producción nacional**. 
+        La cebolla junca es un cultivo de ciclo continuo que requiere una alta inversión en fertilizantes nitrogenados 
+        y plaguicidas para cumplir con la demanda comercial de Corabastos. Sin embargo, su cercanía a la ronda hídrica 
+        genera una presión constante por contaminación difusa.
         """)
-        st.markdown("**Características Técnicas del Lago:**")
-        st.write("- Profundidad > 60m (Clasificación: Lago).\n- Red de afluentes y efluente principal (Río Upía).\n- Ecosistema estratégico de alta montaña.")
+        # Imagen de campo
+        st.image("https://porelparamo.org/sites/default/files/styles/noticia_detalle/public/2021-03/Aquitania_Cebolla_Tota.jpg", caption="Paisaje productivo en la cuenca del Lago")
+        
     with col2:
-        st.image("https://porelparamo.org/sites/default/files/styles/noticia_detalle/public/2021-03/Aquitania_Cebolla_Tota.jpg", caption="Ribera del Lago de Tota")
+        st.write("### Motivo de la Aplicación")
+        st.info("ECO-JUNCA surge para ofrecer soporte técnico y educación ambiental, permitiendo visualizar el impacto de las prácticas agrícolas convencionales y promover una transición sostenible.")
+        # Imagen del Lago
+        st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Lago_de_Tota_Boyac%C3%A1.jpg/800px-Lago_de_Tota_Boyac%C3%A1.jpg", caption="Lago de Tota, Boyacá")
 
-# --- MÓDULO 2: TU MAPA ---
+# --- SECCIÓN 2: MAPA DE USO DE SUELO ---
 elif menu == "Mapa de Uso de Suelo":
-    st.markdown("<div class='main-header'><h1>MAPA DE USO DE SUELO</h1></div>", unsafe_allow_html=True)
-    st.write("### Cartografía Elaborada por el Autor")
-    st.write("Este mapa identifica las áreas de cultivo y la zonificación de impacto directo sobre la cuenca.")
+    st.markdown("<div class='main-header'><h1>ZONIFICACIÓN Y USO DE SUELO</h1></div>", unsafe_allow_html=True)
+    st.write("### Cartografía de Autoría Propia")
     
-    # REEMPLAZA 'mapa.png' por el nombre real de tu archivo subido a GitHub
     try:
-        st.image("mapa_uso_suelo.png", caption="Mapa de Uso de Suelo - Cuenca del Lago de Tota", use_container_width=True)
+        # Aquí se carga tu mapa. Recuerda subirlo a GitHub como mapa_uso_suelo.png
+        st.image("mapa_uso_suelo.png", caption="Análisis geoespacial de la actividad agrícola", use_container_width=True)
+        st.success("**Análisis del Mapa:** La distribución espacial evidencia la alta densidad de cultivos en áreas de protección hídrica.")
     except:
-        st.warning("⚠️ El archivo de imagen 'mapa_uso_suelo.png' no se encuentra en el repositorio de GitHub. Por favor, súbelo.")
+        st.error("⚠️ Sube tu archivo 'mapa_uso_suelo.png' a GitHub para visualizar tu mapa.")
 
-# --- MÓDULO 3: CALCULADORA ---
-elif menu == "Calculadora de Insumos":
-    st.markdown("<div class='main-header'><h1>🧪 CALCULADORA DE IMPACTO</h1></div>", unsafe_allow_html=True)
-    insumo = st.selectbox("Seleccione el insumo químico reportado:", list(insumos_db.keys()))
+# --- SECCIÓN 3: CALCULADORA ---
+elif menu == "Calculadora de Impacto":
+    st.subheader("🧪 Calculadora de Contaminación Difusa")
+    st.write("Seleccione un insumo y la cantidad aplicada para estimar el volumen de agua pura que podría verse comprometida.")
+    
+    insumo = st.selectbox("Insumo químico reportado:", list(insumos_db.keys()))
     cantidad = st.number_input("Cantidad aplicada (Litros o Kg):", min_value=0.0)
     
     if cantidad > 0:
         det = insumos_db[insumo]
         agua_vol = cantidad * 100000
-        st.markdown(f"<div class='section-card'><b>Uso:</b> {det['uso']}<br><b>Impacto Hídrico:</b> {det['impacto']}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='metric-box'><h3>Impacto Potencial: {agua_vol:,.0f} Litros de agua degradada</h3></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='info-card'><b>Uso Técnico:</b> {det['uso']}<br><b>Efecto Ambiental:</b> {det['impacto']}</div>", unsafe_allow_html=True)
+        st.metric("Litros de Agua Afectada", f"{agua_vol:,.0f} L")
 
-# --- MÓDULO 4: ENCUESTAS ---
-elif menu == "Resultados de Encuestas":
-    st.markdown("<div class='main-header'><h1>📊 LABORATORIO DE ENCUESTAS</h1></div>", unsafe_allow_html=True)
+# --- SECCIÓN 4: ENCUESTAS ---
+elif menu == "Laboratorio de Encuestas":
+    st.subheader("📊 Análisis de Percepción en Campo")
     
-    # Gráfico colorido de ejemplo
-    df = pd.DataFrame({
-        "Pregunta": ["Uso de Químicos", "Conciencia Ambiental", "Dispuesto a Cambiar", "Uso de Bioinsumos"],
-        "Si (%)": [85, 40, 70, 25],
-        "No (%)": [15, 60, 30, 75]
+    # Gráfico colorido para las encuestas
+    df_encuesta = pd.DataFrame({
+        "Variable": ["Dependencia Química", "Conciencia del Impacto", "Interés en Bioinsumos"],
+        "Porcentaje": [85, 40, 70]
     })
     
-    fig = px.bar(df, x="Pregunta", y=["Si (%)", "No (%)"], title="Percepción del Agricultor en Aquitania", 
-                 barmode='group', color_discrete_sequence=['#2e7d32', '#d32f2f'])
+    fig = px.bar(df_encuesta, x="Variable", y="Porcentaje", color="Variable", title="Resultados de Encuestas a Agricultores",
+                 color_discrete_sequence=px.colors.qualitative.Dark24)
     st.plotly_chart(fig, use_container_width=True)
     
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("<div class='section-card'><b>Análisis de Uso:</b> El 85% depende de la Urea, lo que confirma la necesidad de estrategias de transición.</div>", unsafe_allow_html=True)
-        st.image("https://img.freepik.com/foto-gratis/agricultor-sosteniendo-plantas-suelo_23-2148580000.jpg", caption="Labor de campo en Aquitania")
-    with c2:
-        st.markdown("<div class='section-card'><b>Análisis de Educación:</b> Solo el 40% asocia la pérdida de oxígeno del lago con sus fertilizantes.</div>", unsafe_allow_html=True)
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.markdown("<div class='info-card'><b>Análisis de Uso:</b> La alta dependencia de fertilizantes nitrogenados confirma la necesidad de programas de transición técnica.</div>", unsafe_allow_html=True)
+    with col_b:
+        st.markdown("<div class='info-card'><b>Análisis Educativo:</b> Existe una brecha entre la práctica agrícola y la percepción del daño ecosistémico al Lago.</div>", unsafe_allow_html=True)
 
-# --- MÓDULO 5: ESTRATEGIAS ---
-elif menu == "Estrategias de Gestión":
-    st.markdown("<div class='main-header'><h1>💡 ESTRATEGIAS DE MANEJO</h1></div>", unsafe_allow_html=True)
-    st.write("Estrategias propuestas según el nivel de uso de insumos:")
-    st.success("✅ **Sostenible:** Sustitución por bioinsumos y manejo agroecológico.")
-    st.warning("⚠️ **Intermedia:** Manejo integrado y reducción del 50% de carga química.")
-    st.error("❌ **Convencional:** Uso intensivo (Modelo actual a transformar).")
+# --- SECCIÓN 5: ESTRATEGIAS ---
+elif menu == "Estrategias de Manejo":
+    st.subheader("💡 Propuesta de Gestión Ambiental")
+    st.success("✅ **Estrategia Sostenible:** Sustitución por biofertilizantes y respeto a la ronda hídrica.")
+    st.warning("⚠️ **Estrategia Intermedia:** Manejo Integrado de Plagas (MIP) y reducción del 50% de químicos.")
+    st.error("❌ **Estrategia Convencional:** Modelo actual con alta carga de insumos sintéticos.")
 
 st.divider()
-st.caption("Isabela O. | Ingeniería Ambiental | Universidad El Bosque")
+st.caption("Isabela O. | Proyecto de Grado | Ingeniería Ambiental | Universidad El Bosque")
