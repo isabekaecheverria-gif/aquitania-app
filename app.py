@@ -10,15 +10,19 @@ st.markdown("""
     .main-header {background-color: #1b5e20; padding: 35px; color: white; border-radius: 15px; text-align: center; margin-bottom: 25px; border-bottom: 5px solid #a5d6a7;}
     .edu-card {background-color: #f1f8e9; padding: 20px; border-radius: 10px; border-left: 10px solid #2e7d32; margin-bottom: 20px;}
     .stMetric {background-color: #ffffff; padding: 15px; border-radius: 10px; border: 1px solid #2e7d32;}
+    .desc-text {font-size: 1.1em; line-height: 1.6; text-align: justify;}
     </style>
     """, unsafe_allow_html=True)
 
-# 2. BASE DE DATOS DIDÁCTICA (INSUMOS)
+# 2. BASE DE DATOS DE CONTAMINANTES AMPLIADA
 insumos_db = {
-    "UREA (CO(NH₂)₂)": {"clase": "Nutrición Vegetal", "leccion": "Se transforma en nitratos que 'asfixian' el lago al quitarle el oxígeno."},
-    "CLORPIRIFOS": {"clase": "Control de Plagas", "leccion": "Es un veneno persistente que afecta el sistema nervioso de seres vivos en el agua."},
-    "MANCOZEB": {"clase": "Protección de Cultivos", "leccion": "Deja metales pesados en el suelo que dañan los microorganismos que ayudan a la cebolla."},
-    "GALLINAZA": {"clase": "Materia Orgánica", "leccion": "Si no está bien curada, lleva bacterias y exceso de sales directamente al Lago."}
+    "UREA (Nitrógeno al 46%)": {"clase": "Fertilizante", "leccion": "Aporta nitratos que alimentan algas invasoras, consumiendo el oxígeno que los peces necesitan."},
+    "FOSFATO DIAMÓNICO (DAP)": {"clase": "Fertilizante", "leccion": "El fósforo es el principal causante del crecimiento excesivo de plantas (buchón) en las orillas."},
+    "CLORPIRIFOS": {"clase": "Insecticida", "leccion": "Altamente tóxico para la fauna acuática; persiste mucho tiempo en el fondo del lago."},
+    "MANCOZEB": {"clase": "Fungicida", "leccion": "Contiene metales que se acumulan en el suelo, matando los bichos buenos que ayudan a la cebolla."},
+    "CARBENDAZIM": {"clase": "Fungicida", "leccion": "Es muy difícil de eliminar del agua y afecta la reproducción de los peces."},
+    "PARAQUAT": {"clase": "Herbicida", "leccion": "Quema la capa protectora del suelo, haciendo que la tierra se lave más fácil hacia el lago cuando llueve."},
+    "GALLINAZA CRUDA": {"clase": "Enmienda", "leccion": "Si no está bien compostada, lleva bacterias y mal olor directamente al agua del lago."}
 }
 
 # 3. NAVEGACIÓN
@@ -26,83 +30,109 @@ with st.sidebar:
     st.markdown("# ECO-JUNCA 🌱")
     st.write("### Educación para el Lago")
     st.divider()
-    menu = st.radio("MÓDULOS DE APRENDIZAJE:", ["Nuestro Territorio", "Mapa de Uso de Suelo", "Simulador de Impacto", "Laboratorio de Percepción", "Rutas de Cambio"])
+    menu = st.radio("MÓDULOS DE APRENDIZAJE:", ["Nuestro Territorio", "Mapa de Uso de Suelo", "Simulador de Impacto", "Laboratorio de Percepción", "Rutas hacia la Siembra"])
     st.divider()
     st.caption("Proyecto de Educación Ambiental | Isabela O.")
 
 # --- SECCIÓN 1: NUESTRO TERRITORIO ---
 if menu == "Nuestro Territorio":
-    st.markdown("<div class='main-header'><h1>ECO-JUNCA: EDUCACIÓN AMBIENTAL</h1><p>Conociendo el impacto de nuestra siembra en el Lago de Tota</p></div>", unsafe_allow_html=True)
+    st.markdown("<div class='main-header'><h1>ECO-JUNCA: EDUCACIÓN AMBIENTAL</h1><p>Conociendo nuestra tierra para proteger nuestro lago</p></div>", unsafe_allow_html=True)
     
     col1, col2 = st.columns([1.5, 1])
     with col1:
-        st.markdown("<div class='edu-card'><h3>🔍 ¿Para qué sirve esta herramienta?</h3>"
-                    "<p>Esta aplicación es un espacio de <b>Educación Ambiental</b> diseñado para que los agricultores de Aquitania comprendamos cómo nuestras decisiones en el cultivo de cebolla junca afectan el Lago de Tota.</p></div>", unsafe_allow_html=True)
+        st.markdown("<div class='edu-card'><h3>🔍 ¿Por qué estamos aquí?</h3>"
+                    "<p class='desc-text'>Aquitania es el corazón de la cebolla en Colombia (80% de la producción), pero nuestra tradición depende de la salud del <b>Lago de Tota</b>. Este ecosistema es único: es el segundo lago navegable más alto del mundo y tiene hasta 67 metros de profundidad. Esta aplicación busca que aprendamos juntos a cultivar de una forma que el lago siga vivo para nuestros hijos.</p></div>", unsafe_allow_html=True)
         
-        st.write("### 🌱 La Cebolla Junca y el Lago")
+        st.write("### 🌱 El Cultivo y su Entorno")
         st.write("""
-        En Aquitania somos orgullosamente los mayores productores de cebolla del país (80%). Sin embargo, 
-        para que esta tradición siga viva, necesitamos aprender a proteger el **Lago de Tota**, nuestra fuente 
-        de vida y agua para más de 250,000 personas. El Lago es un ecosistema profundo (>60m) que necesita 
-        que cuidemos lo que aplicamos en la tierra.
+        La cebolla junca es nuestra identidad, pero al ser un cultivo que nunca descansa, el suelo recibe muchos químicos. 
+        Como el lago es una cuenca cerrada, todo lo que aplicamos termina allí. La educación ambiental es el camino 
+        para cambiar el 'siempre se ha hecho así' por un 'vamos a hacerlo mejor'.
         """)
-        st.image("cultivo.png")
+        # USO DE TU IMAGEN: aquitania.png
+        try:
+            st.image("aquitania.png", caption="Vista panorámica de nuestra región")
+        except:
+            st.warning("⚠️ Sube 'aquitania.png' a GitHub para ver tu imagen aquí.")
         
     with col2:
-        st.info("El objetivo es aprender a producir sin agotar nuestros recursos naturales.")
-        st.image("aquitania.png")
+        st.info("La educación es la herramienta más poderosa para proteger el agua.")
+        # USO DE TU IMAGEN: cultivo.png
+        try:
+            st.image("cultivo.png", caption="Nuestra labor en el campo")
+        except:
+            st.warning("⚠️ Sube 'cultivo.png' a GitHub para ver tu imagen aquí.")
 
 # --- SECCIÓN 2: MAPA DE USO DE SUELO ---
 elif menu == "Mapa de Uso de Suelo":
-    st.markdown("<div class='main-header'><h1>NUESTRO MAPA</h1></div>", unsafe_allow_html=True)
-    st.write("### ¿Cómo estamos usando nuestra tierra?")
-    st.write("Este mapa, creado específicamente para este estudio, nos muestra dónde están nuestros cultivos y qué tan cerca estamos del agua.")
+    st.markdown("<div class='main-header'><h1>NUESTRO MAPA DE USO DE SUELO</h1></div>", unsafe_allow_html=True)
+    st.write("### ¿Qué nos dice el suelo?")
+    st.markdown("""
+    <div class='edu-card'>
+    <b>Análisis del Autor:</b> Este mapa muestra cómo hemos repartido la tierra. Se ve mucha zona de <b>Agricultura Intensiva</b> 
+    muy cerca del agua. Cuando el suelo no tiene plantas nativas que lo protejan (bosques o barreras), 
+    los químicos de la cebolla bajan directo al lago por la lluvia. Esto se llama escorrentía y es lo que debemos aprender a frenar.
+    </div>
+    """, unsafe_allow_html=True)
     
     try:
-        st.image("mapa_uso_suelo.png", caption="Zonificación de cultivos en la cuenca", use_container_width=True)
-        st.success("**Lección del Mapa:** Entre más cerca sembremos de la orilla, más rápido llegan los químicos al Lago.")
+        st.image("mapa_uso_suelo.png", caption="Mapa de Zonificación y Presión Agrícola", use_container_width=True)
     except:
-        st.error("⚠️ Sube tu archivo 'mapa_uso_suelo.png' a GitHub.")
+        st.error("⚠️ Sube el archivo 'mapa_uso_suelo.png' a GitHub.")
 
 # --- SECCIÓN 3: SIMULADOR ---
 elif menu == "Simulador de Impacto":
-    st.subheader("🧪 Simulador de Conciencia Ambiental")
-    st.write("Aprende qué sucede cuando aplicamos químicos en exceso.")
+    st.subheader("🧪 Simulador de Conciencia")
+    st.write("Elige un producto y mira qué lección nos deja para el cuidado del agua.")
     
-    insumo = st.selectbox("Elija un producto que use en su finca:", list(insumos_db.keys()))
-    cantidad = st.number_input("Cantidad aplicada (Litros o Bultos):", min_value=0.0)
+    insumo = st.selectbox("Producto:", list(insumos_db.keys()))
+    cantidad = st.number_input("Cantidad aplicada:", min_value=0.0)
     
     if cantidad > 0:
         det = insumos_db[insumo]
         agua_afectada = cantidad * 100000
-        st.markdown(f"<div class='edu-card'><b>Lo que debemos saber:</b> {det['leccion']}</div>", unsafe_allow_html=True)
-        st.metric("Litros de agua que pierden calidad", f"{agua_afectada:,.0f} L")
+        st.markdown(f"<div class='edu-card'><b>Lección:</b> {det['leccion']}</div>", unsafe_allow_html=True)
+        st.metric("Agua que pierde su pureza (aprox)", f"{agua_afectada:,.0f} L")
 
-# --- SECCIÓN 4: LABORATORIO DE PERCEPCIÓN (ENCUESTAS) ---
+# --- SECCIÓN 4: PERCEPCIÓN ---
 elif menu == "Laboratorio de Percepción":
-    st.markdown("<div class='main-header'><h1>📊 ¿QUÉ PENSAMOS EN EL CAMPO?</h1></div>", unsafe_allow_html=True)
-    st.write("Análisis de las respuestas compartidas por los agricultores de Aquitania.")
+    st.markdown("<div class='main-header'><h1>📊 LO QUE PENSAMOS EN AQUITANIA</h1></div>", unsafe_allow_html=True)
+    st.write("Análisis de las encuestas sobre nuestro compromiso ambiental.")
     
     df_res = pd.DataFrame({
         "Pregunta": ["Dependencia Química", "Conciencia del Daño", "Deseo de Aprender"],
-        "Porcentaje": [85, 40, 75]
+        "Porcentaje": [85, 42, 78]
     })
     
-    fig = px.bar(df_res, x="Pregunta", y="Porcentaje", color="Pregunta", 
-                 title="Percepción sobre Prácticas Agrícolas",
-                 color_discrete_sequence=px.colors.qualitative.Prism)
+    fig = px.bar(df_res, x="Pregunta", y="Porcentaje", color="Pregunta", color_discrete_sequence=px.colors.qualitative.Prism)
     st.plotly_chart(fig, use_container_width=True)
-    
-    st.markdown("<div class='edu-card'><b>Análisis Educativo:</b> Aunque el 85% depende de químicos, un 75% quiere aprender nuevas formas de siembra. ¡Ahí está nuestra oportunidad!</div>", unsafe_allow_html=True)
-    st.image("https://img.freepik.com/foto-gratis/agricultor-sosteniendo-plantas-suelo_23-2148580000.jpg", caption="Educación para el futuro del campo")
+    st.write("**Análisis:** El 78% de nosotros quiere aprender. Eso significa que ECO-JUNCA tiene mucho trabajo por hacer.")
 
-# --- SECCIÓN 5: RUTAS DE CAMBIO (ESTRATEGIAS) ---
-elif menu == "Rutas de Cambio":
-    st.subheader("💡 Rutas hacia una Siembra Sostenible")
-    st.write("La educación ambiental nos propone tres caminos:")
-    st.success("🌱 **Ruta de la Naturaleza:** Sustitución por abonos orgánicos y respeto a la orilla del lago.")
-    st.warning("⚖️ **Ruta del Equilibrio:** Usar menos químicos y solo cuando sea necesario.")
-    st.error("⚠️ **Ruta Tradicional:** El modelo que debemos transformar para no perder el Lago.")
+# --- SECCIÓN 5: RUTAS HACIA LA SIEMBRA (DESPLEGABLES) ---
+elif menu == "Rutas hacia la Siembra":
+    st.subheader("💡 Caminos para proteger nuestro futuro")
+    st.write("Haz clic en cada opción para ver cómo podemos mejorar nuestra relación con el lago:")
+
+    with st.expander("🌱 RUTA DE LA NATURALEZA (Bioinsumos)"):
+        st.write("""
+        * **Abonos orgánicos:** Usar gallinaza bien compostada o biofermentos.
+        * **Cerca viva:** Sembrar alisos o plantas nativas en el borde del lote para que atrapen los químicos antes de que lleguen al agua.
+        """)
+        st.success("¡Esta ruta recupera la vida de tu tierra!")
+
+    with st.expander("⚖️ RUTA DEL EQUILIBRIO (Reducción)"):
+        st.write("""
+        * **Solo lo necesario:** Hacer análisis de suelo para no gastar plata en fertilizante que la planta no va a usar.
+        * **Manejo de envases:** No botar los tarros a las zanjas.
+        """)
+        st.warning("¡Ahorras dinero y proteges el entorno!")
+
+    with st.expander("⚠️ RUTA TRADICIONAL (El reto actual)"):
+        st.write("""
+        * **Riesgo:** Seguir usando venenos rojos y exceso de urea sin control.
+        * **Consecuencia:** Un lago verde, con mal olor y suelo que ya no produce igual.
+        """)
+        st.error("Es el modelo que queremos transformar con educación.")
 
 st.divider()
-st.caption("Isabela O. | Tesis de Educación Ambiental | Universidad El Bosque")
+st.caption("Isabela O. | Educación Ambiental | Universidad El Bosque")
