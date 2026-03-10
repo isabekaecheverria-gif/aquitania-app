@@ -31,10 +31,13 @@ with st.sidebar:
     st.markdown("# 🚦 SAT ECO-JUNCA")
     st.write("### Sistema de Alerta Temprana")
     st.divider()
-    menu = st.radio("MÓDULOS DE GESTIÓN:", [
+        menu = st.radio("MÓDULOS DE GESTIÓN:", [
         "1. Alerta Temprana (Semáforo)", 
         "2. Modelación de Cargas", 
-        "3. Zonificación de Riesgo"
+        "3. Zonificación de Riesgo",
+        "4. Escenarios de Transición"  # <--- NUEVO MÓDULO
+    ])
+
     ])
     st.divider()
     st.caption("Prototipo de Ingeniería Ambiental | Isabela Orozco E.")
@@ -137,3 +140,68 @@ elif menu == "3. Zonificación de Riesgo":
     except:
         pass
 
+# --- MÓDULO 4: ESCENARIOS DE TRANSICIÓN (ESTRATEGIAS) ---
+elif menu == "4. Escenarios de Transición":
+    st.markdown("<div class='main-header'><h1>EVALUACIÓN DE ESCENARIOS AGRONÓMICOS</h1></div>", unsafe_allow_html=True)
+    st.markdown("### Análisis Técnico de Alternativas de Manejo en la Cuenca del Lago de Tota")
+    st.write("Seleccione un escenario para evaluar su viabilidad técnica, impacto financiero y carga contaminante proyectada.")
+
+    # Creación de pestañas interactivas
+    tab1, tab2, tab3 = st.tabs(["🔴 Escenario A: Convencional", "🟢 Escenario B: Manejo Integrado (Eco-Junca)", "🌿 Escenario C: Agroecológico"])
+
+    with tab1:
+        st.markdown("### Estrategia 1: Manejo Convencional (Línea Base)")
+        st.markdown("""
+        **Enfoque:** Netamente Químico / Preventivo ("Por Calendario").  
+        Esta estrategia describe el modelo actual identificado en el diagnóstico territorial. Es un sistema altamente ineficiente e insostenible a largo plazo.
+        """)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.error("**Protocolo Operativo:**")
+            st.write("• Aplicación de moléculas Cat. I y II cada 7-8 días.")
+            st.write("• Dosificación empírica ('al ojo').")
+            st.write("• Nutrición basada en gallinaza cruda y NPK sintético.")
+        with col2:
+            st.metric(label="Reducción de Carga Contaminante", value="0%", delta="- Crítico (Alto Lixiviado)", delta_color="inverse")
+            st.metric(label="Frecuencia de Aplicación", value="20 ciclos/cosecha")
+            
+        st.info("**Viabilidad:** Alta inercia cultural (zona de confort del agricultor), pero insostenible ambientalmente por eutrofización del cuerpo léntico.")
+
+    with tab2:
+        st.markdown("### Estrategia 2: Manejo Integrado (Ruta Priorizada)")
+        st.markdown("""
+        **Enfoque:** Híbrido (Químico Racional + Cultural + Biológico).  
+        Es la estrategia de transición diseñada para este proyecto. Combina la seguridad del control racionalizado con prácticas sostenibles, operada a través del Semáforo Ambiental.
+        """)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.success("**Protocolo Operativo:**")
+            st.write("• **Monitoreo:** Aplicación exclusiva al superar el Umbral de Daño Económico (UDE).")
+            st.write("• **Rotación:** Moléculas de baja toxicidad (Cat. III) alternadas con biopreparados.")
+            st.write("• **Restricción:** Cero aplicaciones bajo pronóstico de precipitación (Lluvia).")
+        with col2:
+            st.metric(label="Reducción de Costos Operativos", value="30%", delta="Ahorro en insumos", delta_color="normal")
+            st.metric(label="Reducción de Carga Tóxica", value="40%", delta="-8 ciclos de fumigación", delta_color="normal")
+            
+        st.info("**Viabilidad (Óptimo Técnico-Social):** Equilibrio perfecto. Protege la ronda hídrica sin exponer al agricultor al riesgo de pérdida económica total.")
+
+    with tab3:
+        st.markdown("### Estrategia 3: Manejo Agroecológico (Sostenible Radical)")
+        st.markdown("""
+        **Enfoque:** Netamente Sostenible / Orgánico.  
+        Escenario ideal de sostenibilidad proyectado a futuro para la restauración total de la cuenca.
+        """)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.warning("**Protocolo Operativo:**")
+            st.write("• Cero uso de síntesis química.")
+            st.write("• Control exclusivo con alelopatía y biocontroladores.")
+            st.write("• Nutrición 100% con compost maduro y microorganismos eficientes.")
+        with col2:
+            st.metric(label="Eliminación de Carga Química", value="100%", delta="Protección Total del Lago", delta_color="normal")
+            st.metric(label="Riesgo Financiero a Corto Plazo", value="Alto", delta="Posible choque productivo", delta_color="inverse")
+            
+        st.info("**Viabilidad:** Inviable a corto plazo debido a la alta degradación actual del suelo y la barrera de aversión al riesgo por parte del productor.")
